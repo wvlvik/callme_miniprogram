@@ -1,0 +1,65 @@
+{
+	"description": "项目配置文件。",
+	"packOptions": {
+		"ignore": []
+	},
+	"setting": {
+		"urlCheck": true,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true
+	},
+	"compileType": "miniprogram",
+	"libVersion": "2.0.7",
+	"appid": "wxf6a57be7d6affef1",
+	"projectname": "pleasecallme",
+	"isGameTourist": false,
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"currentL": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": 2,
+			"list": [
+				{
+					"id": -1,
+					"name": "add",
+					"pathName": "pages/add/add",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "help",
+					"pathName": "pages/help/help",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "list",
+					"pathName": "pages/list/list",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "tabar",
+					"pathName": "component/tabar/tabar",
+					"query": ""
+				}
+			]
+		}
+	}
+}

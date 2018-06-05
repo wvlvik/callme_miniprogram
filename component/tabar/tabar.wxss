@@ -1,0 +1,42 @@
+
+
+/* tab */
+.tablist {
+  z-index: 99;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 160rpx;
+  box-sizing: border-box;
+  /* background-color: #ffffff; */
+  border-top: 1px #E8E8E8 solid;
+  display: flex;
+  align-items: center;
+
+  background-color: rgba(255,255,255,.7);
+  backdrop-filter: saturate(180%) blur(20px);
+}
+
+.tablist .item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  flex: 1;
+}
+
+.tablist .item-hover, .tablist .current {
+  background-color: rgba(0,0,0,0);
+  color: #008E1C;
+}
+
+.tablist .item image {
+  width: 25px;
+  height: 25px;
+}
+
+.tablist .item text {
+  padding-top: 2px;
+  font-size: 12px;
+}

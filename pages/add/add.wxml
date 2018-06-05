@@ -1,0 +1,40 @@
+<view class="page-name">
+  <text>{{!hideTabar ? '添加新' : '编辑'}}联系件</text>
+</view>
+
+<view class="page-content add-wrapper">
+  <view class='field-item'>
+    <input placeholder="名称，如：我的电瓶车" value='{{fieldDefualt.edit || ""}}'/>
+  </view>
+  <view class='field-item'>
+    <input placeholder="电话"/>
+  </view>
+  <view class='field-item'>
+    <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+      <view class="picker">
+        {{array[index]}}
+      </view>
+      <image class='dropdown-ico' src='/images/dropdown-ico.svg'></image>
+    </picker>
+  </view>
+  <view class='field-item'>
+    <view class='photo-field {{uploadImageUrl ? "no-border" : ""}}' bindtap='uploadImage'>
+      <image class='upload-imagesnap' wx:if='{{uploadImageUrl}}' src='{{uploadImageUrl}}' mode='aspectFill'></image>
+      <image class='photo-ico' src='/images/photo-ico.svg'></image>
+    </view>
+  </view>
+
+
+  <view class='callme-btn'>
+    <view class='callme' hover-class='callme-hover' bindtap='createwxaqrcode'>
+      <text>生成二维码并保存至相册</text>
+    </view>
+    <view class='links'>
+      <navigator url='/pages/index/index?phone=13616614914&typeid=1&hide'>预览扫一扫效果</navigator>
+    </view>
+  </view>
+
+</view>
+
+
+<footer-tabar tabindex='0' wx:if='{{!hideTabar}}'></footer-tabar>

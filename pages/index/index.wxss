@@ -1,0 +1,75 @@
+@import '/common/common.wxss';
+
+
+.call-wrapper {
+  
+}
+
+.call-wrapper .photo-wrap {
+  height: 450rpx;
+  width: 100%;
+}
+
+.call-wrapper .photo-wrap image {
+  width: inherit;
+  height: inherit;
+}
+
+.callme-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 600rpx;
+}
+
+.callme-wrap .des {
+  font-size: 44px;
+  font-weight: bold;
+  width: 650rpx;
+}
+
+.callme-btn {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.callme-btn .callme {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 650rpx;
+  height: 60px;
+  font-size: 40rpx;
+  background-image: linear-gradient(-180deg, #17C51E 0%, #008E1C 100%);
+  border-radius: 8px;
+  color: #ffffff;
+}
+
+.callme-btn .callme-hover {
+  background-image: linear-gradient(-180deg, #008E1C 0%, #008E1C 100%);
+}
+
+.callme-btn image {
+  width: 22px;
+  margin-right: .2em;
+}
+
+
+.links {
+  font-size: 30rpx;
+  color: #4A4A4A;
+  padding-top: 40rpx;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.links navigator {
+  margin: 0 1em;
+}

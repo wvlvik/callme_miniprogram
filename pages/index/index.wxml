@@ -1,0 +1,30 @@
+<view class="call-wrapper">
+
+  <view class='photo-wrap'>
+    <image src='/images/image.jpg' mode='aspectFill'></image>
+  </view>
+
+  <view class='callme-wrap'>
+    <text class='des' wx:if="{{typeid === 0}}">抱歉！
+    本车如有挡路，
+    告诉我。
+    </text>
+    <text class='des' wx:if="{{typeid === 1}}">抱歉！
+    出去开个小差，
+    联系我。
+    </text>
+  </view>
+
+
+  <view class='callme-btn'>
+    <view class='callme' bindtap='callmePhone' hover-class='callme-hover'>
+      <image src='/images/phone-ico.svg'></image>
+      <text>请Call我!</text>
+    </view>
+    <view class='links' wx:if='{{showRegister_module}}'>
+      <navigator url='/pages/add/add?id=18616614914' hover-class='navigator-hover'>用户注册</navigator>|<navigator url='/pages/help/help' hover-class='navigator-hover'>使用帮助</navigator>
+    </view>
+  </view>
+
+
+</view>

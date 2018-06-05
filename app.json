@@ -1,0 +1,15 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/add/add",
+    "pages/help/help",
+    "pages/list/list",
+    "component/tabar/tabar"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTitleText": "请Call我!",
+    "navigationBarTextStyle": "black"
+  }
+}

@@ -1,0 +1,59 @@
+@import '/common/common.wxss';
+
+
+.list-wrapper {
+  padding-top: 40rpx;
+}
+
+
+.list-wrapper .item {
+  display: flex;
+  width: 100%;
+  padding: 40rpx 0;
+}
+
+.list-wrapper .item ~ .item {
+  border-top: 1px #f2f2f2 solid;
+}
+
+.list-wrapper .item .img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin-right: 20rpx;
+  background-color: #f2f2f2;
+}
+
+.list-wrapper .item .info {
+  margin-right: 20rpx;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.list-wrapper .item .info text {
+  font-size: 18px;
+}
+
+.list-wrapper .item .info .other {
+  padding-top: 2px;
+  font-size: 15px;
+  color: #9B9B9B;
+}
+
+.list-wrapper .item .oper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.list-wrapper .item .oper image {
+  width: 20px;
+  height: 20px;
+  opacity: .4;
+}
+
+.list-wrapper .item .oper image ~ image {
+  margin-left: 40rpx;
+}
