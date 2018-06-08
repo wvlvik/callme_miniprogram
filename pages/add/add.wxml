@@ -7,7 +7,7 @@
     <input placeholder="名称，如：我的电瓶车" value='{{fieldDefualt.edit || ""}}'/>
   </view>
   <view class='field-item'>
-    <input placeholder="电话"/>
+    <input placeholder="电话" value='{{ tokens }}'/>
   </view>
   <view class='field-item'>
     <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">

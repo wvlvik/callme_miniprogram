@@ -10,7 +10,6 @@ const remoteUrl = config.url
 
 Page({
   data: {
-    tokens: '',
     index: 0,
     fieldDefualt: {},
     hideTabar: false,
@@ -29,6 +28,7 @@ Page({
       hideTabar: !!option.edit || false,
     })
 
+
   },
   bindPickerChange(e) {
     this.setData({
@@ -36,6 +36,12 @@ Page({
     })
   },
   createwxaqrcode() {
+
+    this.setData({
+      tokens: app.globalData.token || ''
+    })
+
+
     wx.request({
       url: 'https://api.weixin.qq.com/cgi-bin/wxaapp/createwxaqrcode?access_token=' + app.globalData.token,
       data: { "path": "pages/index/index?id=1", "width": 430 },
