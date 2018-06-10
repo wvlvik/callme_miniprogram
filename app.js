@@ -1,4 +1,9 @@
 //app.js
+const url = {
+  local: 'http://192.168.1.212:8360/',
+  remote: 'https://salex.applinzi.com/'
+}
+
 App({
   onLaunch() {
     let _this = this
@@ -16,6 +21,6 @@ App({
     // })
   },
   globalData: {
-    apiUrl: 'http://192.168.1.222:8360/api/'
+    apiUrl: url.local
   }
 })

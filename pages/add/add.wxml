@@ -1,40 +1,45 @@
 <view class="page-name">
-  <text>{{!hideTabar ? '添加新' : '编辑'}}联系件</text>
+  <text>{{!hideTabar ? '添加' : '编辑'}}联系件</text>
 </view>
 
-<view class="page-content add-wrapper">
-  <view class='field-item'>
-    <input placeholder="名称，如：我的电瓶车" value='{{fieldDefualt.edit || ""}}'/>
-  </view>
-  <view class='field-item'>
-    <input placeholder="电话" value='{{ tokens }}'/>
-  </view>
-  <view class='field-item'>
-    <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
-      <view class="picker">
-        {{array[index]}}
+
+<form bindsubmit="applyInfoSubmit" bindreset="applyInfoReset">
+  <view class="page-content add-wrapper">
+    <view class='field-item'>
+      <input name="name" placeholder="填写名称"/>
+    </view>
+    <view class='field-item'>
+      <input name="tel" placeholder="填写电话"/>
+    </view>
+    <view class='field-item'>
+      <picker bindchange="bindPickerChange" name="type" value="{{index}}" range="{{array}}">
+        <view class="picker">
+          {{array[index]}}
+        </view>
+        <image class='dropdown-ico' src='/images/dropdown-ico.svg'></image>
+      </picker>
+    </view>
+    <view class='field-item'>
+      <view class='photo-field {{uploadImageUrl ? "no-border" : ""}}' bindtap='uploadImage'>
+        <image class='upload-imagesnap' wx:if='{{uploadImageUrl}}' src='http://192.168.1.212:8360/uploads/img/{{uploadImageUrl}}' mode='aspectFill'></image>
+        <image class='photo-ico' src='/images/photo-ico.svg'></image>
+        <input type='hidden' name='image' value='{{uploadImageUrl}}'></input>
+        <!-- <input type='file' name="image" bindtap='uploadImage'></input> -->
       </view>
-      <image class='dropdown-ico' src='/images/dropdown-ico.svg'></image>
-    </picker>
-  </view>
-  <view class='field-item'>
-    <view class='photo-field {{uploadImageUrl ? "no-border" : ""}}' bindtap='uploadImage'>
-      <image class='upload-imagesnap' wx:if='{{uploadImageUrl}}' src='{{uploadImageUrl}}' mode='aspectFill'></image>
-      <image class='photo-ico' src='/images/photo-ico.svg'></image>
     </view>
-  </view>
 
-
-  <view class='callme-btn'>
-    <view class='callme' hover-class='callme-hover' bindtap='createwxaqrcode'>
-      <text>生成二维码并保存至相册</text>
+    <view class='callme-btn'>
+      <button class='callme' hover-class='callme-hover' formType="submit">
+        <text>生成二维码并保存至相册</text>
+      </button>
+      <!-- <view class='links'>
+        <navigator url='/pages/index/index?phone=13616614914&typeid=1&hide'>预览扫一扫效果</navigator>
+      </view> -->
     </view>
-    <view class='links'>
-      <navigator url='/pages/index/index?phone=13616614914&typeid=1&hide'>预览扫一扫效果</navigator>
-    </view>
-  </view>
 
-</view>
+  </view>
+</form>
+
 
 
 <footer-tabar tabindex='0' wx:if='{{!hideTabar}}'></footer-tabar>

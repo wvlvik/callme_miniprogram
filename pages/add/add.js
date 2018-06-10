@@ -14,7 +14,7 @@ Page({
     fieldDefualt: {},
     hideTabar: false,
     array: ['车主', '店主'],
-    uploadImageUrl: remoteUrl + 'upload/wxf6a57be7d6affef1.o6zAJs-Je37vTK20ReGQgY3JysZQ.BVieEYW1BsFqa1a6caa00e2d5e4433e7724396de3b98.jpg'
+    uploadImageUrl: ''
   },
   onReady() {
     wx.setNavigationBarColor({
@@ -37,46 +37,90 @@ Page({
   },
   createwxaqrcode() {
 
-    this.setData({
-      tokens: app.globalData.token || ''
+    // this.setData({
+    //   tokens: app.globalData.token || ''
+    // })
+
+
+    // wx.request({
+    //   url: 'https://api.weixin.qq.com/cgi-bin/wxaapp/createwxaqrcode?access_token=' + app.globalData.token,
+    //   data: { "path": "pages/index/index?id=1", "width": 430 },
+    //   method: 'POST',
+    //   header: {
+    //     'content-type': 'application/json'
+    //   },
+    //   success: function (res) {
+    //     console.log(res.data)
+    //   },
+    //   fail: function (res) {
+    //     console.log('isFail')
+    //   }
+    // })
+
+  },
+  uploadImage() {
+    let _this = this
+    wx.chooseImage({
+      success: function (res) {
+        let tempFilePaths = res.tempFilePaths
+        wx.uploadFile({
+          url: app.globalData.apiUrl + 'api/upload',
+          filePath: tempFilePaths[0],
+          name: 'image',
+          success: function (res) {
+            let data = JSON.parse(res.data)
+            _this.setData({
+              uploadImageUrl: data.data.fileUrl
+            })
+          }
+        })
+      }
     })
+  },
 
-
+  applyInfoSubmit(e) {
     wx.request({
-      url: 'https://api.weixin.qq.com/cgi-bin/wxaapp/createwxaqrcode?access_token=' + app.globalData.token,
-      data: { "path": "pages/index/index?id=1", "width": 430 },
+      url: app.globalData.apiUrl + 'api/apply',
+      data: e.detail.value,
       method: 'POST',
       header: {
         'content-type': 'application/json'
       },
       success: function (res) {
-        console.log(res.data)
+        let data = res.data
+
+        // supercode不够，管理员需要生成
+        if (!data.data) {
+          wx.showToast({
+            title: data.errmsg,
+            icon: 'none',
+            duration: 2000
+          })
+          return
+        }
+
+        // 展示小程序二维码图片
+        let imgUrl = app.globalData.apiUrl + 'uploads/code/' + data.data.codeImage
+        // wx.previewImage({
+        //   current: '',
+        //   urls: [imgUrl]
+        // })
+
+        wx.saveImageToPhotosAlbum({
+          filePath: imgUrl,
+          success(res) {
+            console.log('保存到相册')
+          }
+        })
+
       },
       fail: function (res) {
         console.log('isFail')
       }
     })
   },
-  uploadImage() {
-    let _this = this
-    wx.chooseImage({
-      success: function (res) {
-        var tempFilePaths = res.tempFilePaths
-        wx.uploadFile({
-          url: remoteUrl, //仅为示例，非真实的接口地址
-          filePath: tempFilePaths[0],
-          name: 'file',
-          formData: {
-            'user': 'test'
-          },
-          success: function (res) {
-            var data = JSON.parse(res.data)
-            _this.setData({
-              uploadImageUrl: remoteUrl + data.result
-            })
-          }
-        })
-      }
-    })
+
+  applyInfoReset() {
+
   }
 })
