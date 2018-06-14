@@ -1,3 +1,4 @@
+const user = require('../../service/user');
 const app = getApp()
 
 Page({
@@ -36,6 +37,13 @@ Page({
 
     this.getUserApply()
 
+  },
+
+  // 注册新用户
+  registerNewUser() {
+    user.loginByWeixin().then(res => {
+      console.log(res.code)
+    })
   },
 
   // 联系
