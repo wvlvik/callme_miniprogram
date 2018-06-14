@@ -1,9 +1,3 @@
-//app.js
-const url = {
-  local: 'http://192.168.1.222:8360/',
-  remote: 'https://salex.applinzi.com/'
-}
-
 const util = require('./utils/util');
 const api = require('./config/api');
 const user = require('./service/user');
@@ -11,7 +5,7 @@ const user = require('./service/user');
 
 App({
   onLaunch() {
-    let _this = this
+    let _this = this;
     
     //获取用户的登录信息
     user.checkLogin().then(res => {
@@ -23,7 +17,7 @@ App({
     });
   },
   globalData: {
-    apiUrl: url.local,
+    apiUrl: api.localUrl,
     userInfo: {
       nickname: 'Hi, 游客',
       username: '点击去登录',

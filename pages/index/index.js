@@ -40,9 +40,15 @@ Page({
   },
 
   // 注册新用户
-  registerNewUser() {
+  registerNewUser(e) {
+    let dataset = e.currentTarget.dataset;
+
+    // wx.navigateTo({
+    //   url: dataset.url
+    // })
+
     user.loginByWeixin().then(res => {
-      console.log(res.code)
+      console.log('ssssddd')
     })
   },
 
