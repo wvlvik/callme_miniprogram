@@ -1,8 +1,11 @@
 const user = require('../../service/user');
+const util = require('../../utils/util.js');
+const api = require('../../config/api.js');
 const app = getApp()
 
 Page({
   data: {
+    rootUrl: api.rootUrl,
     userApply: {
       tel: '18616614914',
       type: 0
@@ -23,7 +26,6 @@ Page({
         if (res.authSetting['scope.userInfo']) {
           wx.getUserInfo({
             success: function (res) {
-              console.log('GetUserInfo2')
               _this.setData({
                 userInfo: res.userInfo
               })
@@ -41,15 +43,21 @@ Page({
 
   // 注册新用户
   registerNewUser(e) {
+    if (!e.detail.userInfo) {
+      util.showErrorToast('受权失败');
+      return;
+    }
+
     let dataset = e.currentTarget.dataset;
-
-    // wx.navigateTo({
-    //   url: dataset.url
-    // })
-
+    // 登录成功跳转至列表页
     user.loginByWeixin().then(res => {
-      console.log('ssssddd')
+      wx.navigateTo({
+        url: dataset.url
+      })
+    }).catch((err) => {
+      util.showErrorToast('登录失败');
     })
+
   },
 
   // 联系
@@ -61,7 +69,10 @@ Page({
 
   // 获取用户信息
   bindGetUserInfo(e) {
-    console.log('GetUserInfo1')
+    if (!e.detail.userInfo) {
+      util.showErrorToast('受权失败');
+      return;
+    }
 
     !this.data.userInfo && e.detail.userInfo && this.setData({
       userInfo: e.detail.userInfo

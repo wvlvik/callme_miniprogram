@@ -1,7 +1,7 @@
 <view class="call-wrapper">
 
   <view class='photo-wrap'>
-    <image src='{{userApply.image ? "http://192.168.1.212:8360/uploads/img/" + userApply.image : "/images/image.jpg"}}' mode='aspectFill'></image>
+    <image src='{{userApply.image ? rootUrl + "uploads/img/" + userApply.image : "/images/image.jpg"}}' mode='aspectFill'></image>
   </view>
 
   <view class='callme-wrap'>
@@ -23,7 +23,7 @@
     </button>
 
     <view class='links' wx:if='{{showRegister_module}}'>
-        <view data-url='/pages/add/add?id=18616614914' hover-class='navigator-hover' bindtap='registerNewUser'>用户注册</view>
+        <button data-url='/pages/list/list' hover-class='navigator-hover' open-type="getUserInfo" bindgetuserinfo='registerNewUser'>我的账户</button>
       <!-- |<navigator url='/pages/help/help' hover-class='navigator-hover'>使用帮助</navigator> -->
       <!-- |<view bindtap='contactus'>联系客服</view> -->
       <!-- |<button open-type='contact'>联系客服</button> -->

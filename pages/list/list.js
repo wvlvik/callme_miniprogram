@@ -1,5 +1,9 @@
+const api = require('../../config/api.js');
+const util = require('../../utils/util.js');
+
 Page({
   data: {
+    rootUrl: api.rootUrl,
     currentItemInd: 0
   },
   onReady() {
@@ -8,37 +12,58 @@ Page({
       backgroundColor: '#f2f2f2'
     })
   },
+
+
   onLoad(option) {
     let _this = this
-    wx.request({
-      url: 'https://salex.applinzi.com/api',
-      success: function (res) {
-        _this.setData({
-          lists: res.data.data
-        })
-        console.log(res.data.data)
-      }
+
+    wx.showLoading({
+      title: '加载中',
     })
+
+    // 检查登录状态
+    util.checkSession().then(res => {
+      let userInfo = wx.getStorageSync('userInfo');
+
+      wx.request({
+        url: api.rootUrl + 'api/apply?user_id=' + userInfo.username,
+        method: 'GET',
+        header: {
+          'content-type': 'application/json'
+        },
+        success: function (res) {
+          _this.setData({
+            lists: res.data.data
+          });
+          wx.hideLoading();
+        }
+      })
+
+    }).catch(e => {
+      console.log('跳登录页面');
+    })
+
+    
   },
+
+
   onEditItem(e) {
     let ind = e.currentTarget.dataset.ind
 
     this.setData({
       currentItemInd: ind || 0
-    })
+    });
 
     if(ind) {
       wx.navigateTo({
         url: '/pages/add/add?edit=' + ind,
       })
     }else {
-      wx.showToast({
-        title: 'ID为空',
-        icon: 'none',
-        duration: 2000
-      })
+      util.showErrorToast('ID为空');
     }
   },
+
+
   onDeleteItem(e) {
     let ind = e.currentTarget.dataset.ind
 
@@ -61,5 +86,11 @@ Page({
         duration: 2000
       })
     }
-  }
+  },
+
+
+  formatTime(da) {
+    console.log(da)
+    return util.formatTime(da);
+  } 
 })

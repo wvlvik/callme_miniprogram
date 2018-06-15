@@ -17,7 +17,7 @@ App({
     });
   },
   globalData: {
-    apiUrl: api.localUrl,
+    apiUrl: api.rootUrl,
     userInfo: {
       nickname: 'Hi, 游客',
       username: '点击去登录',

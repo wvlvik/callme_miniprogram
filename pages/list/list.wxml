@@ -4,47 +4,27 @@
 
 <view class="page-content list-wrapper">
   
-  <view class='item' wx:if="{{ lists }}" wx:for="{{ lists }}">
-    <image class='img' src='/images/image.jpg' mode='aspectFill'></image>
-    <view class='info'>
-      <text>我的法拉力</text>
-      <view class='other'>
-        今日: {{ item.create_date }}次
+  <block wx:if="{{ lists.length }}">
+    <view class='item' wx:for="{{ lists }}" wx:key="{{ index }}">
+      <image class='img' src='{{ item.image ?  rootUrl + "uploads/img/" + item.image : "/images/image.jpg"}}' mode='aspectFill'></image>
+      <view class='info'>
+        <text>{{ item.name }}</text>
+        <view class='other'>
+          {{ item.type === 1 ? '店主' : '车主' }} | {{ item.create_date || '0' }}次
+        </view>
+      </view>
+      <view class='oper'>
+        <image class='edit' src='/images/eidt-ico.svg' data-ind='{{ item.id }}' bindtap='onEditItem'></image>
+        <!-- <image class='delete' src='/images/delete-ico.svg' data-ind='2' bindtap='onDeleteItem'></image> -->
       </view>
     </view>
-    <view class='oper'>
-      <image class='edit' src='/images/eidt-ico.svg' data-ind='2' bindtap='onEditItem'></image>
-      <image class='delete' src='/images/delete-ico.svg' data-ind='2' bindtap='onDeleteItem'></image>
-    </view>
-  </view>
-  
-  <!-- <view class='item'>
-    <image class='img' src='/images/image.jpg' mode='aspectFill'></image>
-    <view class='info'>
-      <text>黑色的自行车</text>
-      <view class='other'>
-        今日: 20次
-      </view>
-    </view>
-    <view class='oper'>
-      <image class='edit' src='/images/eidt-ico.svg' data-ind='1' bindtap='onEditItem'></image>
-      <image class='delete' src='/images/delete-ico.svg' data-ind='1' bindtap='onDeleteItem'></image>
-    </view>
-  </view>
-  
-  <view class='item'>
-    <image class='img' mode='aspectFill'></image>
-    <view class='info'>
-      <text>黑色的自行车</text>
-      <view class='other'>
-        今日: 20次
-      </view>
-    </view>
-    <view class='oper'>
-      <image class='edit' src='/images/eidt-ico.svg' bindtap='onEditItem'></image>
-      <image class='delete' src='/images/delete-ico.svg' bindtap='onDeleteItem'></image>
-    </view>
-  </view> -->
+  </block>
+  <block wx:else>
+    <view class='no-data-box'>
+      <text>没有任何联系件。</text>
+      <button class='add-contack-item'>添加</button>
+    </view> 
+  </block>
   
 </view>
 

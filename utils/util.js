@@ -31,7 +31,6 @@ function request(url, data = {}, method = "GET") {
         'X-Callme-Token': wx.getStorageSync('token')
       },
       success: function (res) {
-        console.log("success");
 
         if (res.statusCode == 200) {
 
@@ -101,7 +100,7 @@ function login() {
       success: function (res) {
         if (res.code) {
           //登录远程服务器
-          console.log(res)
+          // console.log(res)
           resolve(res);
         } else {
           reject(res);
@@ -119,7 +118,6 @@ function getUserInfo() {
     wx.getUserInfo({
       withCredentials: true,
       success: function (res) {
-        console.log(res)
         resolve(res);
       },
       fail: function (err) {
@@ -134,7 +132,7 @@ function redirect(url) {
   //判断页面是否需要登录
   if (false) {
     wx.redirectTo({
-      url: '/pages/auth/login/login'
+      url: '/pages/index/index'
     });
     return false;
   } else {
@@ -147,7 +145,14 @@ function redirect(url) {
 function showErrorToast(msg) {
   wx.showToast({
     title: msg,
-    image: '/static/images/icon_error.png'
+    image: '/images/error-white.svg'
+  })
+}
+
+function showSuccessToast(msg) {
+  wx.showToast({
+    title: msg,
+    icon: 'success'
   })
 }
 
@@ -159,6 +164,7 @@ module.exports = {
   request,
   redirect,
   showErrorToast,
+  showSuccessToast,
   checkSession,
   login,
   getUserInfo,
