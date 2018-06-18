@@ -57,3 +57,20 @@
 .list-wrapper .item .oper image ~ image {
   margin-left: 40rpx;
 }
+
+
+.userbar-count {
+  font-size: 25rpx;
+  color: #555;
+  text-align: center;
+  margin-top: -15rpx;
+}
+
+.no-data-box text {
+  display: block;
+  color: #333;
+  font-size: 50rpx;
+  text-align: center;
+  padding-top: 100rpx;
+  padding-bottom: 40rpx;
+}

@@ -3,7 +3,7 @@
     <image src='/images/list-ico{{tabindex === 1 ? "-selected" : ""}}.svg'></image>
     <text>列表</text>
   </navigator>
-  <navigator class='item {{tabindex === 0 ? "current" : ""}}' url='/pages/add/add' open-type='redirect' hover-class='item-hover'>
+  <navigator class='item {{tabindex === 0 ? "current" : ""}} {{!canclick ? "disable" : ""}}' url='/pages/add/add' open-type='redirect' hover-class='item-hover'>
     <image src='/images/add-ico{{tabindex === 0 ? "-selected" : ""}}.svg'></image>
     <text>添加</text>
   </navigator>

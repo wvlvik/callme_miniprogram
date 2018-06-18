@@ -4,12 +4,13 @@
     "pages/add/add",
     "pages/help/help",
     "pages/list/list",
-    "component/tabar/tabar"
+    "component/tabar/tabar",
+    "pages/home/home"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#ffffff",
-    "navigationBarTitleText": "请Call我!",
+    "navigationBarTitleText": "Call我!",
     "navigationBarTextStyle": "black"
   }
 }

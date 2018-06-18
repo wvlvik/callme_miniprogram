@@ -23,7 +23,11 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  flex: 1;
+  flex: 1; 
+}
+
+.tablist .item.disable {
+  pointer-events: none;
 }
 
 .tablist .item-hover, .tablist .current {

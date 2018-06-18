@@ -9,9 +9,8 @@ App({
     
     //获取用户的登录信息
     user.checkLogin().then(res => {
-      console.log('app login')
-      this.globalData.userInfo = wx.getStorageSync('userInfo');
-      this.globalData.token = wx.getStorageSync('token');
+      _this.globalData.userInfo = wx.getStorageSync('userInfo');
+      _this.globalData.token = wx.getStorageSync('token');
     }).catch(() => {
 
     });
@@ -25,4 +24,4 @@ App({
     },
     token: '',
   }
-})
+});

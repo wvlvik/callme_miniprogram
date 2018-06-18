@@ -6,10 +6,11 @@ const app = getApp();
 Page({
   data: {
     rootUrl: api.rootUrl,
-    uploadImageUrl: '',
-    index: 0,
-    hideTabar: false,
-    array: ['车主', '店主']
+    array: ['车主', '店主'],
+    type: 0,
+    savetoAlbum: true,
+    showPreviewButton: false,
+    user_count: 0
   },
 
 
@@ -22,15 +23,69 @@ Page({
 
 
   onLoad(option) {
+    if(option.id) {
+      this.setData({
+        savetoAlbum: true,
+        id: option.id
+      });
+      this.runEidt();
+    }else {
+      this.setData({
+        savetoAlbum: wx.getStorageSync('user_count') > 0 ? true : false
+      });
+    }
+
     this.setData({
-      hideTabar: !!option.edit || false,
-    })
+      user_count: wx.getStorageSync('user_count')
+    });
+  },
+
+
+  onShow() {
+    // console.log('show')
+    // this.runEidt();
+  },
+
+
+  runEidt() {
+    let _this = this;
+    if(_this.data.id) {
+      // 检查登录状态
+      util.checkSession().then(res => {
+        let userInfo = wx.getStorageSync('userInfo');
+
+        wx.request({
+          url: api.rootUrl + 'api/apply/' + this.data.id,
+          method: 'GET',
+          header: {
+            'content-type': 'application/json'
+          },
+          success: function (res) {
+            let data = res.data.data;
+
+            _this.setData({
+              name: data.name,
+              image: data.image,
+              tel: data.tel,
+              type: data.type,
+              supercode_id: data.supercode_id,
+              savetoAlbum: data.supercode_id !== '' ? true : false,
+              showPreviewButton: data.supercode_id !== '' ? true : false,
+            });
+          }
+        })
+
+      }).catch(e => {
+        console.log('跳登录页面');
+      });
+
+    }
   },
 
 
   bindPickerChange(e) {
     this.setData({
-      index: e.detail.value
+      type: e.detail.value
     })
   },
 
@@ -46,10 +101,12 @@ Page({
           filePath: tempFilePaths[0],
           name: 'image',
           success: function (res) {
-            let data = JSON.parse(res.data)
+            let data = JSON.parse(res.data);
+
             _this.setData({
-              uploadImageUrl: data.data.fileUrl
-            })
+              image: data.data.fileUrl
+            });
+
           }
         })
       }
@@ -58,20 +115,28 @@ Page({
 
 
   applyInfoSubmit(e) {
+    let _this = this;
     // 检查登录状态
     util.checkSession().then(res => {
       let userInfo = wx.getStorageSync('userInfo');
+      let page = 'api/apply';
+      let method = 'POST';
+
+      if(_this.data.id) {
+        page = page + '/' + _this.data.id;
+        method = 'PUT';
+      }
+
 
       wx.request({
-        url: api.rootUrl + 'api/apply',
+        url: api.rootUrl + page,
         data: Object.assign({}, e.detail.value, {user_id: userInfo.username}),
-        method: 'POST',
+        method: method,
         header: {
           'content-type': 'application/json'
         },
         success: function (res) {
           let data = res.data;
-          let _this = this;
 
           // supercode不够，管理员需要生成
           if (!data.data) {
@@ -92,10 +157,19 @@ Page({
             filePath: imgUrl,
             success(res) {
             
-              console.log(res)
+              console.log(res);
 
             }
           });
+
+
+          if(_this.data.id) {
+            wx.navigateBack();
+          }else {
+            wx.redirectTo({
+              url: '/pages/list/list'
+            });
+          }
 
         },
         fail: function (res) {
