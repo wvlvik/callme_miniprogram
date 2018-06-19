@@ -80,6 +80,10 @@
   color: #ffffff;
 }
 
+.callme-btn .callme::after {
+  display: none;
+}
+
 .callme-btn .callme-hover {
   background-image: linear-gradient(-180deg, #008E1C 0%, #008E1C 100%);
 }
