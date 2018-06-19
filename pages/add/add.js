@@ -145,31 +145,32 @@ Page({
           }
 
           // 展示小程序二维码图片
-          let imgUrl = api.rootUrl + 'uploads/code/' + data.data.codeImage;
+          let imgUrl = api.rootUrl + 'www/uploads/code/' + data.data.codeImage;
           // wx.previewImage({
           //   current: '',
           //   urls: [imgUrl]
           // })
 
-          util.showSuccessToast('已保存至相册');
 
           wx.saveImageToPhotosAlbum({
             filePath: imgUrl,
             success(res) {
-            
-              console.log(res);
+
+              util.showSuccessToast('已保存至相册');
+
+              if (_this.data.id) {
+                wx.navigateBack();
+              } else {
+                wx.redirectTo({
+                  url: '/pages/list/list'
+                });
+              }
 
             }
           });
 
 
-          if(_this.data.id) {
-            wx.navigateBack();
-          }else {
-            wx.redirectTo({
-              url: '/pages/list/list'
-            });
-          }
+         
 
         },
         fail: function (res) {
