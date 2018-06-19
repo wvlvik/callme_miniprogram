@@ -6,6 +6,7 @@ Page({
   data: {
     rootUrl: api.rootUrl,
     user_count: 0,
+    user_id: 0,
     showlist: true,
   },
   onReady() {

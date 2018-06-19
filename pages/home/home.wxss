@@ -13,7 +13,7 @@
 
 .call-wrapper .photo-wrap .faceshow {
   position: absolute;
-  bottom: -45rpx;
+  bottom: -65rpx;
   width: 140rpx;
   height: 140rpx;
   left: 50%;
@@ -35,6 +35,7 @@
 .photo-wrap .faceshow .name {
   text-align: center;
   font-size: 30rpx;
+  line-height: 1;
   color: #666;
 }
 

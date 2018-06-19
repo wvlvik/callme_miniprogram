@@ -29,7 +29,8 @@ Page({
               _this.setData({
                 userInfo: res.userInfo
               });
-              _this.scanAddRecord();
+
+              _this.data.showRegister_module && _this.scanAddRecord();
             }
           });
 
@@ -38,7 +39,7 @@ Page({
     });
 
 
-    this.getUserApply();
+    this.getApply();
 
   },
 
@@ -61,12 +62,14 @@ Page({
 
   },
 
+
   // 联系
   callmePhone() {
     this.data.userInfo && wx.makePhoneCall({
       phoneNumber: this.data.userApply.tel
     })
   },
+
 
   // 获取用户信息
   bindGetUserInfo(e) {
@@ -79,9 +82,10 @@ Page({
       userInfo: e.detail.userInfo
     })
 
-    this.callmePhone()
-    this.scanAddRecord()
+    this.callmePhone();
+    this.data.showRegister_module && this.scanAddRecord();
   },
+
 
   // 记录扫描
   scanAddRecord() {
@@ -105,7 +109,7 @@ Page({
   },
 
   // 获取联系件信息
-  getUserApply() {
+  getApply() {
     let _this = this;
     
     _this.data.id && wx.request({
@@ -119,11 +123,42 @@ Page({
         _this.setData({
           userApply: data.data
         });
+
+        _this.getUserCard(data.data.user_id);
+
       },
       fail: function (res) {
         console.log('isFail')
       }
     })
+  },
+
+
+
+  getUserCard(user_id) {
+    let _this = this;
+
+    wx.request({
+      url: api.rootUrl + 'api/auth/getUser?user_id=' + user_id,
+      header: {
+        'content-type': 'application/json'
+      },
+      success: function (res) {
+        let data = res.data;
+
+        // console.log(data.data)
+        
+        _this.setData({
+          userCard: data.data
+        });
+
+      },
+      fail: function (res) {
+        console.log('isFail')
+      }
+    });
   }
 
-})
+
+
+});

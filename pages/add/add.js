@@ -10,7 +10,8 @@ Page({
     type: 0,
     savetoAlbum: true,
     showPreviewButton: false,
-    user_count: 0
+    user_count: 0,
+    user_id: 0
   },
 
 

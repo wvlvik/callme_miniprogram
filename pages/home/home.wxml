@@ -2,10 +2,10 @@
 
   <view class='photo-wrap'>
     <image class='s' src='{{userApply.image ? rootUrl + "uploads/img/" + userApply.image : "/images/image.jpg"}}' mode='aspectFill'></image>
-    <!-- <view class='faceshow'>
-      <image class='s' src='{{userInfo.avatar ? userInfo.avatar : "/images/user-default-ico.jpg"}}' mode='aspectFill'></image>
-      <view class='name'>{{userInfo.nickname || '大王巡山'}}</view>
-    </view> -->
+    <view class='faceshow'>
+      <image class='s' src='{{userCard.avatar ? userCard.avatar : "/images/user-default-ico.jpg"}}' mode='aspectFill'></image>
+      <view class='name'>{{userCard.nickname || '大王巡山'}}</view>
+    </view> 
   </view>
 
   <view class='callme-wrap'>
