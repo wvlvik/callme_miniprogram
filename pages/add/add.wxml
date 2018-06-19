@@ -2,7 +2,7 @@
   <text>{{!id ? '添加' : '编辑'}}联系件</text>
 </view>
 
-<view class='userbar-count'>可添加{{ user_count }}个</view>
+<view class='userbar-count'>{{user_id}} - 可添加{{ user_count }}个</view>
 
 
 <form bindsubmit="applyInfoSubmit" bindreset="applyInfoReset">
@@ -36,7 +36,7 @@
         <text wx:else>保存</text>
       </button>
       <view class='links' wx:if="{{ showPreviewButton }}">
-        <navigator url='/pages/index/index?id={{ supercode_id }}&hide'>预览扫一扫</navigator>
+        <navigator url='/pages/home/home?id={{ supercode_id }}&hide'>预览扫一扫</navigator>
       </view> 
     </view>
 

@@ -5,7 +5,8 @@ const util = require('../../utils/util.js');
 Page({
   data: {
     rootUrl: api.rootUrl,
-    user_count: 0
+    user_count: 0,
+    showlist: true,
   },
   onReady() {
     wx.setNavigationBarColor({
@@ -40,6 +41,7 @@ Page({
         wx.setStorageSync('user_count', res.data.data.count);
 
         _this.setData({
+          user_id: userInfo.id,
           user_count: res.data.data.count
         });
       }
@@ -69,7 +71,8 @@ Page({
         },
         success: function (res) {
           _this.setData({
-            lists: res.data.data
+            lists: res.data.data,
+            showlist: !!res.data.data || false
           });
           wx.hideLoading();
         }
@@ -77,6 +80,9 @@ Page({
 
 
     }).catch(e => {
+      _this.setData({
+        showlist: false
+      });
       wx.hideLoading();
       console.log('跳登录页面');
     });
@@ -111,7 +117,7 @@ Page({
     if(ind) {
       wx.navigateTo({
         url: '/pages/add/add?id=' + ind,
-      })
+      });
     }else {
       util.showErrorToast('ID为空');
     }
@@ -123,16 +129,33 @@ Page({
 
     if(ind) {
       wx.showModal({
-        title: '删除提示',
-        content: `确认删除${ind}？`,
+        title: '提示',
+        content: `确认删除此联系件？`,
         success: function (res) {
           if (res.confirm) {
-            console.log('用户点击确定')
+            
+            wx.request({
+              url: api.rootUrl + 'api/apply',
+              data: {
+                id: ind
+              },
+              method: 'DELETE',
+              header: {
+                'content-type': 'application/json'
+              },
+              success: function (res) {
+                wx.redirectTo({
+                  url: '/pages/list/list',
+                });
+              }
+            });
+
+
           } else if (res.cancel) {
             console.log('用户点击取消')
           }
         }
-      })
+      });
     } else {
       wx.showToast({
         title: 'ID为空',

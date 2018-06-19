@@ -6,11 +6,39 @@
 }
 
 .call-wrapper .photo-wrap {
-  height: 450rpx;
+  position: relative;
+  height: 440rpx;
   width: 100%;
 }
 
-.call-wrapper .photo-wrap image {
+.call-wrapper .photo-wrap .faceshow {
+  position: absolute;
+  bottom: -45rpx;
+  width: 140rpx;
+  height: 140rpx;
+  left: 50%;
+  margin-left: -70rpx;
+  z-index: 9;
+  
+}
+
+.photo-wrap .faceshow image  {
+  box-sizing: border-box;
+  border: 7rpx #fff solid;
+  background-color: #fff;
+  border-radius: 50%;
+  width: inherit;
+  height: inherit;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, .2);
+}
+
+.photo-wrap .faceshow .name {
+  text-align: center;
+  font-size: 30rpx;
+  color: #666;
+}
+
+.call-wrapper .photo-wrap image.s {
   width: inherit;
   height: inherit;
 }

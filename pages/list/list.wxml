@@ -3,9 +3,8 @@
 </view>
 
 <view class="page-content list-wrapper">
-
-
   
+  <view class='userbar-count'>{{user_id}} - 可添加{{ user_count }}个</view>
   
    <block wx:if="{{ lists.length }}">
     <view class='item' wx:for="{{ lists }}" wx:key="{{ index }}">
@@ -18,6 +17,7 @@
       </view>
       <view class='oper'>
         <image class='edit' src='/images/eidt-ico.svg' data-ind='{{ item.id }}' bindtap='onEditItem'></image>
+        <image class='edit' src='/images/delete-ico.svg' data-ind='{{ item.id }}' bindtap='onDeleteItem'></image>
       </view>
     </view>
   </block>

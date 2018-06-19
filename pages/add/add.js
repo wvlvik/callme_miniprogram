@@ -34,16 +34,15 @@ Page({
         savetoAlbum: wx.getStorageSync('user_count') > 0 ? true : false
       });
     }
-
-    this.setData({
-      user_count: wx.getStorageSync('user_count')
-    });
   },
 
 
   onShow() {
-    // console.log('show')
-    // this.runEidt();
+    let userInfo = wx.getStorageSync('userInfo');
+    this.setData({
+      user_count: wx.getStorageSync('user_count'),
+      user_id: userInfo.id
+    });
   },
 
 
@@ -128,6 +127,7 @@ Page({
       }
 
 
+
       wx.request({
         url: api.rootUrl + page,
         data: Object.assign({}, e.detail.value, {user_id: userInfo.username}),
@@ -138,6 +138,7 @@ Page({
         success: function (res) {
           let data = res.data;
 
+
           // supercode不够，管理员需要生成
           if (!data.data) {
             util.showErrorToast(data.errmsg);
@@ -145,30 +146,17 @@ Page({
           }
 
           // 展示小程序二维码图片
-          let imgUrl = api.rootUrl + 'www/uploads/code/' + data.data.codeImage;
-          // wx.previewImage({
-          //   current: '',
-          //   urls: [imgUrl]
-          // })
+          if (data.data.codeImage) {
+            let imgUrl = api.rootUrl + 'uploads/code/' + data.data.codeImage;
+            wx.previewImage({
+              current: '',
+              urls: [imgUrl]
+            });
+          }
 
-
-          wx.saveImageToPhotosAlbum({
-            filePath: imgUrl,
-            success(res) {
-
-              util.showSuccessToast('已保存至相册');
-
-              if (_this.data.id) {
-                wx.navigateBack();
-              } else {
-                wx.redirectTo({
-                  url: '/pages/list/list'
-                });
-              }
-
-            }
+          !_this.data.id && wx.redirectTo({
+            url: '/pages/list/list',
           });
-
 
          
 
