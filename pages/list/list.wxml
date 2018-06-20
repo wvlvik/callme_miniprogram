@@ -12,7 +12,7 @@
       <view class='info'>
         <text>{{ item.name }}</text>
         <view class='other'>
-          {{ item.supercode_id == '' ? '不可用' : '可用' }} | {{ item.type === 1 ? '店主' : '车主' }} | {{ item.create_date || '0' }}次
+          {{ item.supercode_id == '' ? '不可用' : '可用' }} | {{ item.type === 1 ? '店主' : '车主' }}
         </view>
       </view>
       <view class='oper'>

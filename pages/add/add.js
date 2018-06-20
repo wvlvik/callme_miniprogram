@@ -1,12 +1,13 @@
 const api = require('../../config/api.js');
 const util = require('../../utils/util.js');
 const app = getApp();
+let types = ['车主', '店主', '自定义'];
 
 
 Page({
   data: {
     rootUrl: api.rootUrl,
-    array: ['车主', '店主'],
+    array: types,
     type: 0,
     savetoAlbum: true,
     showPreviewButton: false,
@@ -19,11 +20,12 @@ Page({
     wx.setNavigationBarColor({
       frontColor: '#000000',
       backgroundColor: '#f2f2f2'
-    })
+    });
   },
 
 
   onLoad(option) {
+    let userInfo = wx.getStorageSync('userInfo');
     if(option.id) {
       this.setData({
         savetoAlbum: true,
@@ -35,15 +37,28 @@ Page({
         savetoAlbum: wx.getStorageSync('user_count') > 0 ? true : false
       });
     }
+
+
+    userInfo.user_vip && this.setData({
+      array: types.concat(['整段'])
+    });
+
+
+    wx.showShareMenu({
+      withShareTicket: true
+    });
+
   },
 
 
   onShow() {
     let userInfo = wx.getStorageSync('userInfo');
+
     this.setData({
       user_count: wx.getStorageSync('user_count'),
       user_id: userInfo.id
     });
+
   },
 
 
@@ -68,6 +83,8 @@ Page({
               image: data.image,
               tel: data.tel,
               type: data.type,
+              custom_word: data.custom_word,
+              custom_text: data.custom_text,
               supercode_id: data.supercode_id,
               savetoAlbum: data.supercode_id !== '' ? true : false,
               showPreviewButton: data.supercode_id !== '' ? true : false,
@@ -86,7 +103,7 @@ Page({
   bindPickerChange(e) {
     this.setData({
       type: e.detail.value
-    })
+    });
   },
 
 
@@ -178,5 +195,18 @@ Page({
 
   applyInfoReset() {
 
+  },
+
+  // 分享
+  onShareAppMessage: function (res) {
+    if (res.from === 'button') {
+      // 来自页面内转发按钮
+      // console.log(res.target)
+    }
+    return {
+      title: 'Call我吧',
+      path: '/pages/home/home?id=' + this.data.supercode_id
+    }
   }
-})
+
+});

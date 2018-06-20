@@ -39,6 +39,11 @@ Page({
     });
 
 
+    wx.showShareMenu({
+      withShareTicket: true
+    });
+
+
     this.getApply();
 
   },
@@ -157,6 +162,18 @@ Page({
         console.log('isFail')
       }
     });
+  },
+
+  // 分享
+  onShareAppMessage: function (res) {
+    if (res.from === 'button') {
+      // 来自页面内转发按钮
+      // console.log(res.target)
+    }
+    return {
+      title: 'Call我吧',
+      path: '/pages/home/home?id=' + this.data.userApply.supercode_id
+    }
   }
 
 

@@ -21,6 +21,15 @@
         <image class='dropdown-ico' src='/images/dropdown-ico.svg'></image>
       </picker>
     </view>
+
+    <view class='field-item' wx:if='{{ type == 2 }}' >
+       <input name="custom_word" placeholder="自定义内容" value="{{ custom_word }}" /> 
+    </view>
+
+    <view class='field-item' wx:if='{{ type == 3 }}' >
+       <textarea name="custom_text" auto-focus placeholder="自定义整段" value='{{ custom_text }}' />
+    </view>
+
     <view class='field-item'>
       <view class='photo-field {{ image ? "no-border" : "" }}' bindtap='uploadImage'>
         <image class='upload-imagesnap' wx:if='{{ image }}' src='{{rootUrl}}uploads/img/{{ image }}' mode='aspectFill'></image>
@@ -35,9 +44,14 @@
         <text wx:if="{{ savetoAlbum }}">生成二维码并保存至相册</text>
         <text wx:else>保存</text>
       </button>
-      <view class='links' wx:if="{{ showPreviewButton }}">
-        <navigator url='/pages/home/home?id={{ supercode_id }}&hide'>预览扫一扫</navigator>
-      </view> 
+      <block wx:if="{{ showPreviewButton }}">
+        <view class='share-btn'>
+          <button class='share' open-type='share'>分享给朋友</button>
+        </view>
+        <view class='links'>
+          <navigator url='/pages/home/home?id={{ supercode_id }}&hide'>预览效果</navigator>
+        </view>
+      </block>
     </view>
 
   </view>

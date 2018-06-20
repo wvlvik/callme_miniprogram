@@ -9,14 +9,19 @@
   </view>
 
   <view class='callme-wrap'>
-    <text class='des' wx:if="{{userApply.type === 0}}">抱歉！
+    <text class='des' wx:if="{{userApply.type == 0}}">抱歉！
     本车如有挡路，
     告诉我。
     </text>
-    <text class='des' wx:if="{{userApply.type === 1}}">抱歉！
+    <text class='des' wx:if="{{userApply.type == 1}}">抱歉！
     出去开个小差，
     有事联系。
     </text>
+    <text class='des' wx:if="{{ userApply.type == 2 }}">打扰！
+    {{ userApply.custom_word }}
+    请联系。
+    </text>
+    <text class='des' wx:if="{{ userApply.type == 3 }}">{{ userApply.custom_text }}</text>
   </view>
 
 
@@ -26,12 +31,19 @@
       <text>Call我!</text>
     </button>
 
-    <view class='links' wx:if='{{showRegister_module}}'>
-        <button data-url='/pages/list/list' hover-class='navigator-hover' open-type="getUserInfo" bindgetuserinfo='registerNewUser'>我的账户</button>
-      <!-- |<navigator url='/pages/help/help' hover-class='navigator-hover'>使用帮助</navigator> -->
-      <!-- |<view bindtap='contactus'>联系客服</view> -->
-      <!-- |<button open-type='contact'>联系客服</button> -->
-    </view>
+    <block wx:if="{{ showRegister_module }}">
+      <view class='links'>
+          <button data-url='/pages/list/list' hover-class='navigator-hover' open-type="getUserInfo" bindgetuserinfo='registerNewUser'>我的账户</button>
+        <!-- |<navigator url='/pages/help/help' hover-class='navigator-hover'>使用帮助</navigator> -->
+        <!-- |<view bindtap='contactus'>联系客服</view> -->
+        <!-- |<button open-type='contact'>联系客服</button> -->
+      </view>
+    </block>
+    <block wx:else>
+      <view class='share-btn'>
+        <button class='share' open-type='share'>分享给朋友</button>
+      </view>
+    </block>
   </view>
 
 
