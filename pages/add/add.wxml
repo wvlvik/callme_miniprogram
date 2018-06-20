@@ -27,7 +27,7 @@
     </view>
 
     <view class='field-item' wx:if='{{ type == 3 }}' >
-       <textarea name="custom_text" auto-focus placeholder="自定义整段" value='{{ custom_text }}' />
+       <textarea name="custom_text" placeholder="自定义整段" value='{{ custom_text }}' />
     </view>
 
     <view class='field-item'>
