@@ -7,7 +7,7 @@ Page({
     rootUrl: api.rootUrl,
     user_count: 0,
     user_id: 0,
-    showlist: true,
+    showlist: true
   },
   onReady() {
     wx.setNavigationBarColor({

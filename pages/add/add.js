@@ -44,9 +44,9 @@ Page({
     });
 
 
-    wx.showShareMenu({
-      withShareTicket: true
-    });
+    // wx.showShareMenu({
+    //   withShareTicket: true
+    // });
 
   },
 
@@ -198,15 +198,15 @@ Page({
   },
 
   // 分享
-  onShareAppMessage: function (res) {
-    if (res.from === 'button') {
-      // 来自页面内转发按钮
-      // console.log(res.target)
-    }
-    return {
-      title: this.data.name,
-      path: 'pages/index/index?id=' + this.data.supercode_id
-    }
-  }
+  // onShareAppMessage: function (res) {
+  //   if (res.from === 'button') {
+  //     // 来自页面内转发按钮
+  //     // console.log(res.target)
+  //   }
+  //   return {
+  //     title: this.data.name,
+  //     path: 'pages/index/index?id=' + this.data.supercode_id
+  //   }
+  // }
 
 });

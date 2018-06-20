@@ -45,9 +45,9 @@
         <text wx:else>保存</text>
       </button>
       <block wx:if="{{ showPreviewButton }}">
-        <view class='share-btn'>
+        <!-- <view class='share-btn'>
           <button class='share' open-type='share'>分享给朋友</button>
-        </view>
+        </view> -->
         <view class='links'>
           <navigator url='/pages/home/home?id={{ supercode_id }}&hide'>预览效果</navigator>
         </view>
