@@ -204,8 +204,8 @@ Page({
       // console.log(res.target)
     }
     return {
-      title: 'Call我吧',
-      path: '/pages/home/home?id=' + this.data.supercode_id
+      title: this.data.name,
+      path: 'pages/index/index?id=' + this.data.supercode_id
     }
   }
 

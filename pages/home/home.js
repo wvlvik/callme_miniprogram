@@ -19,7 +19,6 @@ Page({
       id: option.id || null
     });
 
-
     wx.getSetting({
       success: function (res) {
         if (res.authSetting['scope.userInfo']) {
@@ -171,8 +170,8 @@ Page({
       // console.log(res.target)
     }
     return {
-      title: 'Call我吧',
-      path: '/pages/home/home?id=' + this.data.userApply.supercode_id
+      title: this.data.userApply.name,
+      path: 'pages/index/index?id=' + this.data.id
     }
   }
 
